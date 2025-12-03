@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto AR - Realidad Aumentada</title>
+    
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    
+    <!-- AR.js -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    
+    <link rel="stylesheet" href="src/ui/styles.css">
+</head>
+<body style="margin: 0; overflow: hidden;">
+    
+    <!-- Escena AR con A-Frame -->
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+        
+        <!-- Definir el marcador (Hiro por defecto) -->
+        <a-marker preset="hiro" id="marker">
+            
+            <!-- Modelo 3D que se superpone al marcador -->
+            <a-entity id="model-container" position="0 0 0">
+                <!-- Modelo principal -->
+                <a-entity 
+                    id="model" 
+                    gltf-model="url(/models/1997_endless_zeal_nissan_240sx_s14_lettys_ff.glb)"
+                    scale="100.0 100.0 100.0"
+                    position="0 0.5 0"
+                    rotation="0 0 0"
+                    visible="false">
+                </a-entity>
+                
+                <!-- Modelo de respaldo (cubo simple) -->
+                <a-box 
+                    id="fallback-model"
+                    position="0 0.5 0" 
+                    material="color: #4CC3D9"
+                    scale="0.5 0.5 0.5"
+                    animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
+                    visible="false">
+                </a-box>
+            </a-entity>
+            
+        </a-marker>
+        
+        <!-- Cámara -->
+        <a-entity camera></a-entity>
+        
+    </a-scene>
+    
+    <!-- UI Overlay -->
+    <div id="ui-container">
+        <div id="info-panel">
+            <h2 id="title">Modelo AR</h2>
+            <p id="description">Apunta a la imagen marcadora para ver el modelo en 3D</p>
+        </div>
+        
+        <div id="controls">
+            <button id="rotate-btn" class="control-btn">🔄 Rotar</button>
+            <button id="reset-btn" class="control-btn">↺ Reiniciar</button>
+            <button id="info-btn" class="control-btn">ℹ️ Info</button>
+        </div>
+        
+        <div id="status" class="status">Cargando...</div>
+        <div id="loading-progress" class="loading-progress" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-text">Cargando modelo 3D...</div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script type="module" src="src/main.ts"></script>
+</body>
+</html>
