@@ -1,4 +1,4 @@
-# WebAR Project - Nissan 240SX
+# WebAR Project
 
 ## Problemas Solucionados
 
