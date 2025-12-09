@@ -2,6 +2,14 @@
 declare var Hands: any;
 declare var Camera: any;
 
+/**
+ * Handles Hand Tracking using Google MediaPipe Hands.
+ * Detects gestures for driving the car:
+ * - Open Hand: Forward
+ * - Fist: Stop
+ * - Peace Sign: Reverse
+ * - Hand X Position: Steering
+ */
 export class HandTracker {
     private hands: any;
     private videoElement: HTMLVideoElement | null = null;
@@ -12,8 +20,8 @@ export class HandTracker {
     public isReady: boolean = false;
 
     // Outputs
-    public steering: number = 0; // -1 to 1
-    public throttle: number = 0; // 0 or 1
+    public steering: number = 0; // Range: -1 (Left) to 1 (Right)
+    public throttle: number = 0; // Range: 1 (Fwd), 0 (Stop), -0.5 (Rev)
     public isHandDetected: boolean = false;
 
     constructor() {
@@ -104,17 +112,17 @@ export class HandTracker {
             // VirtualJoystick x>0 is steer right.
             this.steering = rawSteer * 2.0; // amplify
 
-            // 2. Throttle: Open vs Closed Hand
-            // Heuristic: Average distance of fingertips to wrist
-            // Tips: 4 (Thumb), 8 (Index), 12 (Middle), 16 (Ring), 20 (Pinky)
-            // Wrist: 0
+            // 2. Throttle: Logic
+            // Open Hand (5 fingers) -> Forward (1)
+            // Fist (0 fingers) -> Stop (0)
+            // Peace (2 fingers) -> Reverse (-1)
 
-            const isFist = this.detectFist(landmarks);
-
-            if (isFist) {
-                this.throttle = 0; // Stop/Brake
+            if (this.detectPeace(landmarks)) {
+                this.throttle = -0.5; // Reverse half speed
+            } else if (this.detectFist(landmarks)) {
+                this.throttle = 0; // Stop
             } else {
-                this.throttle = 1; // Go
+                this.throttle = 1; // Go (Default if hand detected and not closed/peace)
             }
 
         } else {
@@ -122,6 +130,32 @@ export class HandTracker {
             this.steering = 0;
             this.throttle = 0;
         }
+    }
+
+    private detectPeace(landmarks: any[]): boolean {
+        // Peace Sign: Index (8) and Middle (12) are open. Ring (16) and Pinky (20) are closed.
+
+        const idxTip = landmarks[8];
+        const idxPip = landmarks[6];
+
+        const midTip = landmarks[12];
+        const midPip = landmarks[10];
+
+        const ringTip = landmarks[16];
+        const ringPip = landmarks[14];
+
+        const pinkyTip = landmarks[20];
+        const pinkyPip = landmarks[18];
+
+        // Open: Tip above PIP (y is smaller than PIP y)
+        const idxOpen = idxTip.y < idxPip.y;
+        const midOpen = midTip.y < midPip.y;
+
+        // Closed: Tip below PIP (y is larger than PIP y)
+        const ringClosed = ringTip.y > ringPip.y;
+        const pinkyClosed = pinkyTip.y > pinkyPip.y;
+
+        return idxOpen && midOpen && ringClosed && pinkyClosed;
     }
 
     private detectFist(landmarks: any[]): boolean {

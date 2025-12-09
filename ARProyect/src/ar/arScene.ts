@@ -165,16 +165,20 @@ export function initAR() {
                             // Steering
                             input.x += tracker.steering;
 
-                            // Throttle (tracker returns 0 or 1)
-                            // We need to map Throttle 1 to Input Y -1 (Forward)
-                            // Throttle 0 to Input Y 0 (Stop)
-                            // This overrides other inputs if hand is present? Or sums?
-                            // Let's sum for now, but usually hand takes precedence.
-                            if (tracker.throttle > 0.5) {
-                                input.y = -1; // Full speed forward
+                            // Throttle Mapping
+                            // HandTracker: 1 (Fwd), 0 (Stop), -0.5 (Rev)
+                            // Car Input Y: -1 (Fwd), 0 (Stop), 1 (Rev)
+
+                            if (tracker.throttle > 0.1) {
+                                input.y = -1; // Full Speed Forward
+                            } else if (tracker.throttle < -0.1) {
+                                input.y = 1; // Reverse
                             } else {
-                                // If hand is closed (throttle 0), maybe brake?
-                                // input.y = 0; // Coast
+                                // Coast/Stop if 0
+                                // If Joystick is NOT being used, we should set to 0 to stop.
+                                // If Joystick IS being used, we essentially override it if hand is detected as Fist?
+                                // Let's just set to 0 if hand is explicitly 0 (Fist).
+                                input.y = 0;
                             }
                         }
 

@@ -1,3 +1,7 @@
+/**
+ * Manages procedural audio synthesis using Web Audio API.
+ * Generates engine sounds using oscillators (FM Synthesis) to avoid external assets.
+ */
 export class AudioManager {
     private ctx: AudioContext | null = null;
     private engineOsc: OscillatorNode | null = null;

@@ -10,8 +10,16 @@ export function setupUIControls() {
         colorBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const color = (e.target as HTMLElement).getAttribute('data-color');
-                if (color && window.carManager) {
-                    window.carManager.setCarColor(color);
+                console.log('🎨 Color button clicked:', color);
+
+                if (color) {
+                    if (window.carManager) {
+                        window.carManager.setCarColor(color);
+                        // Play click sound if audio is ready
+                        if ((window as any).audioManager) (window as any).audioManager.playClick();
+                    } else {
+                        console.error('❌ CarManager not initialized yet');
+                    }
                 }
             });
         });
@@ -19,6 +27,17 @@ export function setupUIControls() {
         // Control buttons
         const rotateBtn = document.getElementById('rotate-btn');
         const resetBtn = document.getElementById('reset-btn');
+        const infoBtn = document.getElementById('info-btn');
+        const infoPanel = document.getElementById('info-panel');
+
+        // Botón: Info
+        if (infoBtn && infoPanel) {
+            infoBtn.addEventListener('click', () => {
+                const isVisible = infoPanel.style.display !== 'none';
+                infoPanel.style.display = isVisible ? 'none' : 'block';
+                if ((window as any).audioManager) (window as any).audioManager.playClick();
+            });
+        }
 
         // Botón: Rotar
         if (rotateBtn) {
@@ -39,7 +58,7 @@ export function setupUIControls() {
             resetBtn.addEventListener('click', () => {
                 const model = document.getElementById('model');
                 if (model) {
-                    model.setAttribute('scale', '50 50 50');
+                    model.setAttribute('scale', '20 20 20');
                     model.setAttribute('rotation', '0 0 0');
                 }
                 if (window.carManager) {

@@ -1,48 +1,66 @@
-# WebAR Project
+# 🚗 AR Car Tuner & Configurator
 
-## Problemas Solucionados
+A WebAR experience that allows users to visualize, customize, and drive a Nissan 240SX using Augmented Reality and Computer Vision.
 
-1. **Orden de carga de scripts** - A-Frame ahora carga antes que AR.js
-2. **HTTPS habilitado** - Requerido para acceso a cámara
-3. **AR.js actualizado** - Usando versión compatible
-4. **Manejo de errores** - Mejor feedback al usuario
+![AR Concept](https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png)
 
-## Instrucciones de Uso
+## ✨ Características
 
-### 1. Instalar dependencias
-```bash
-npm install
-```
+### 1. 🎨 Personalización (Tuning)
+-   **Cambio de Color en Tiempo Real:** Interfaz flotante para pintar la carrocería.
+-   **Materiales PBR:** Pintura metálica con reflejos realistas (HDR).
 
-### 2. Ejecutar en modo desarrollo
-```bash
-npm run dev
-```
+### 2. 🕹️ Conducción Híbrida
+-   **Joystick Virtual:** Control táctil en pantalla para acelerar y girar.
+-   **Física Arcade:** Sistema de velocidad, aceleración y fricción adaptado a escala de mesa.
 
-### 3. Acceder a la aplicación
-- Abre `https://localhost:3000` en tu navegador
-- **Importante**: Acepta el certificado SSL autofirmado
-- Permite acceso a la cámara cuando se solicite
+### 3. 🖐️ Control por Gestos (IA)
+Usa tu mano frente a la cámara para conducir sin tocar la pantalla:
+-   **Mano Abierta 🖐️:** Acelerar (Adelante).
+-   **Puño Cerrado ✊:** Frenar/Parar.
+-   **Amor y Paz (✌️):** Reversa.
+-   **Posición Lateral:** Mueve tu mano a la izquierda/derecha de la pantalla para girar el volante.
+-   *Powered by Google MediaPipe Hands.*
 
-### 4. Usar la aplicación
-- Imprime el marcador Hiro: https://ar-js-org.github.io/AR.js/data/images/hiro.png
-- Apunta la cámara al marcador
-- El modelo 3D del Nissan 240SX aparecerá sobre el marcador
+### 4. 🔊 Audio Procedural
+-   **Motor Sintetizado:** El sonido del motor se genera en tiempo real (Web Audio API) y cambia de tono según las RPM/Velocidad.
+-   **Efectos UI:** Feedback sonoro al interactuar.
 
-## Requisitos
+## 🛠️ Tecnologías
 
-- **HTTPS**: La aplicación requiere HTTPS para acceso a cámara
-- **Navegador moderno**: Chrome, Firefox, Safari (con soporte WebRTC)
-- **Marcador Hiro**: Impreso o en pantalla
+-   **A-Frame & Three.js:** Renderizado 3D.
+-   **AR.js:** Tracking de marcadores (Hiro).
+-   **MediaPipe Hands:** Visión Artificial para detección de gestos.
+-   **TypeScript:** Lógica de negocio tipada y segura.
+-   **Vite:** Entorno de desarrollo rápido.
 
-## Controles
+## 🚀 Instalación y Uso
 
-- **🔄 Rotar**: Rota el modelo 90 grados
-- **↺ Reiniciar**: Restaura posición y escala original
-- **Pinch**: Pellizca en pantalla táctil para escalar
+### Prerrequisitos
+-   Node.js instalado.
+-   Un dispositivo con cámara (Móvil o Laptop).
+-   El marcador **Hiro** impreso o visible en otra pantalla. [Descargar Marcador](https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png)
 
-## Solución de Problemas
+### Pasos
+1.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
 
-1. **"Error de cámara"**: Verifica permisos de cámara en el navegador
-2. **"Certificado no válido"**: Acepta el certificado SSL en desarrollo
-3. **Modelo no aparece**: Asegúrate de que el marcador esté bien iluminado y visible
+2.  **Iniciar servidor de desarrollo:**
+    ```bash
+    npm run dev
+    ```
+
+3.  **Abrir en el navegador:**
+    -   Visita `https://localhost:3000` (o la IP local mostrada).
+    -   **Nota:** Debes aceptar los permisos de cámara y el certificado SSL (si es local).
+
+4.  **¡A disfrutar!**
+    -   Apunta al marcador Hiro.
+    -   Espera a que cargue el modelo y la IA ("🖐️ IA de Manos Activada").
+    -   Toca la pantalla una vez para activar el sonido.
+
+## ⚠️ Notas Importantes
+-   **Rendimiento:** El uso simultáneo de AR y Detección de Manos es intensivo. Se recomienda un móvil de gama media-alta o PC.
+-   **Audio:** Los navegadores bloquean el audio automático. Es necesario hacer clic/tap al menos una vez para escuchar el motor.
