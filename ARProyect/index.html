@@ -69,10 +69,21 @@
             <div class="color-btn" data-color="#00ff00" style="background-color: #00ff00;"></div>
         </div>
 
-        <div id="controls">
-            <button id="rotate-btn" class="control-btn">🔄 Rotar</button>
-            <button id="reset-btn" class="control-btn">↺ Reiniciar</button>
-            <button id="info-btn" class="control-btn">ℹ️ Info</button>
+        <div id=\"model-selector-container\" class=\"model-selector-container\">
+            <label for=\"model-select\" class=\"model-selector-label\">Modelo:</label>
+            <select id=\"model-select\" class=\"model-selector\">
+                <option value=\"/models/1997_endless_zeal_nissan_240sx_s14_lettys_ff.glb\">Nissan 240SX</option>
+                <option value=\"/models/2014 McLaren P1.glb\">McLaren P1 (2014)</option>
+                <option value=\"/models/2015 McLaren P1 GTR.glb\">McLaren P1 GTR (2015)</option>
+                <option value=\"/models/2019_mclaren_600lt.glb\">McLaren 600LT (2019)</option>
+                <option value=\"/models/2022_porsche_911_gt3_992.glb\">Porsche 911 GT3 (2022)</option>
+            </select>
+        </div>
+
+        <div id=\"controls\">
+            <button id=\"rotate-btn\" class=\"control-btn\">🔄 Rotar</button>
+            <button id=\"reset-btn\" class=\"control-btn\">↺ Reiniciar</button>
+            <button id=\"info-btn\" class=\"control-btn\">ℹ️ Info</button>
         </div>
 
         <div id="status" class="status">Cargando...</div>
