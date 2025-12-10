@@ -8,7 +8,6 @@ declare var Camera: any;
  * - Open Hand: Forward
  * - Fist: Stop
  * - Peace Sign: Reverse
- * - Hand X Position: Steering
  */
 export class HandTracker {
     private hands: any;
