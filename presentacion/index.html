@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Car Tuner - Presentación Interactiva</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navigation">
+        <div class="nav-dots"></div>
+        <div class="nav-progress"></div>
+    </nav>
+
+    <!-- Contador de slides -->
+    <div class="slide-counter">
+        <span class="current-slide">1</span>
+        <span class="divider">/</span>
+        <span class="total-slides">10</span>
+    </div>
+
+    <!-- Controles -->
+    <button class="nav-button prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <button class="nav-button next" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+
+    <!-- Container de slides -->
+    <div class="slides-container">
+        
+        <!-- Slide 1: Portada -->
+        <section class="slide active" data-slide="1">
+            <div class="slide-content hero">
+                <div class="hero-icon">🚗</div>
+                <h1 class="hero-title">AR Car Tuner</h1>
+                <p class="hero-subtitle">Configurador de Autos en Realidad Aumentada</p>
+                <div class="hero-tags">
+                    <span class="tag">WebAR</span>
+                    <span class="tag">Computer Vision</span>
+                    <span class="tag">IA</span>
+                </div>
+                <p class="hero-description">
+                    Una experiencia inmersiva que combina realidad aumentada, 
+                    visión artificial y control por gestos
+                </p>
+            </div>
+        </section>
+
+        <!-- Slide 2: Introducción -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2 class="slide-title">¿Qué es AR Car Tuner?</h2>
+                <div class="intro-grid">
+                    <div class="intro-card">
+                        <div class="card-icon">🎨</div>
+                        <h3>Personalización</h3>
+                        <p>Cambia el color de tu vehículo en tiempo real con materiales realistas</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="card-icon">🎮</div>
+                        <h3>Conducción</h3>
+                        <p>Controla el auto con joystick virtual y física arcade</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="card-icon">🖐️</div>
+                        <h3>Gestos IA</h3>
+                        <p>Maneja sin tocar la pantalla usando tu mano</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="card-icon">🔊</div>
+                        <h3>Audio Procedural</h3>
+                        <p>Sonido del motor generado en tiempo real</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Problema y Solución -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content split">
+                <div class="split-section problem">
+                    <div class="section-label">❌ Problema</div>
+                    <h3>Limitaciones Actuales</h3>
+                    <ul class="feature-list">
+                        <li>Configuradores 2D poco inmersivos</li>
+                        <li>Falta de interacción natural</li>
+                        <li>Experiencias estáticas sin dinamismo</li>
+                        <li>Limitada accesibilidad en showrooms</li>
+                    </ul>
+                </div>
+                <div class="split-section solution">
+                    <div class="section-label">✅ Solución</div>
+                    <h3>Nuestra Propuesta</h3>
+                    <ul class="feature-list">
+                        <li>Visualización AR en 3D realista</li>
+                        <li>Control por gestos con IA</li>
+                        <li>Experiencia interactiva y dinámica</li>
+                        <li>Accesible desde cualquier navegador</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Características Principales -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2 class="slide-title">Características Principales</h2>
+                <div class="features-showcase">
+                    <div class="feature-big">
+                        <span class="feature-number">01</span>
+                        <h3>Personalización en Tiempo Real</h3>
+                        <p>Interfaz intuitiva para cambiar el color de la carrocería</p>
+                        <div class="feature-details">
+                            <span class="detail-badge">Materiales PBR</span>
+                            <span class="detail-badge">Pintura Metálica</span>
+                            <span class="detail-badge">HDR Lighting</span>
+                        </div>
+                    </div>
+                    <div class="feature-big">
+                        <span class="feature-number">02</span>
+                        <h3>Sistema de Conducción Híbrido</h3>
+                        <p>Controla el vehículo con joystick virtual o gestos</p>
+                        <div class="feature-details">
+                            <span class="detail-badge">Física Arcade</span>
+                            <span class="detail-badge">Control Táctil</span>
+                            <span class="detail-badge">Escala Mesa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Control por Gestos -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2 class="slide-title">Control por Gestos con IA</h2>
+                <p class="slide-subtitle">Maneja el auto usando solo tu mano frente a la cámara</p>
+                <div class="gestures-grid">
+                    <div class="gesture-card">
+                        <div class="gesture-icon">🖐️</div>
+                        <h4>Mano Abierta</h4>
+                        <p>Acelerar hacia adelante</p>
+                    </div>
+                    <div class="gesture-card">
+                        <div class="gesture-icon">✊</div>
+                        <h4>Puño Cerrado</h4>
+                        <p>Frenar o detenerse</p>
+                    </div>
+                    <div class="gesture-card">
+                        <div class="gesture-icon">✌️</div>
+                        <h4>Señal de Paz</h4>
+                        <p>Reversa</p>
+                    </div>
+                    <div class="gesture-card">
+                        <div class="gesture-icon">👈👉</div>
+                        <h4>Posición Lateral</h4>
+                        <p>Girar izquierda/derecha</p>
+                    </div>
+                </div>
+                <div class="tech-badge">
+                    Powered by Google MediaPipe Hands
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Tecnologías -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2 class="slide-title">Stack Tecnológico</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <span class="tech-emoji">🎯</span>
+                            <h3>A-Frame & Three.js</h3>
+                        </div>
+                        <p>Renderizado 3D y gestión de escenas inmersivas</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <span class="tech-emoji">📱</span>
+                            <h3>AR.js</h3>
+                        </div>
+                        <p>Tracking de marcadores Hiro para realidad aumentada</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <span class="tech-emoji">🤖</span>
+                            <h3>MediaPipe Hands</h3>
+                        </div>
+                        <p>Visión artificial para detección de gestos en tiempo real</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <span class="tech-emoji">💻</span>
+                            <h3>TypeScript</h3>
+                        </div>
+                        <p>Lógica de negocio tipada y segura</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <span class="tech-emoji">⚡</span>
+                            <h3>Vite</h3>
+                        </div>
+                        <p>Entorno de desarrollo rápido con HMR</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <span class="tech-emoji">🔊</span>
+                            <h3>Web Audio API</h3>
+                        </div>
+                        <p>Síntesis de audio procedural para motor</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Arquitectura -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2 class="slide-title">Arquitectura del Sistema</h2>
+                <div class="architecture-diagram">
+                    <div class="arch-layer">
+                        <div class="layer-title">Presentación</div>
+                        <div class="layer-items">
+                            <span class="arch-box">UI Controller</span>
+                            <span class="arch-box">Joystick</span>
+                            <span class="arch-box">Audio Manager</span>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="layer-title">Lógica de Negocio</div>
+                        <div class="layer-items">
+                            <span class="arch-box">Hand Tracker</span>
+                            <span class="arch-box">Gesture Controller</span>
+                            <span class="arch-box">Car Manager</span>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="layer-title">Renderizado</div>
+                        <div class="layer-items">
+                            <span class="arch-box">AR Scene</span>
+                            <span class="arch-box">Three.js</span>
+                            <span class="arch-box">A-Frame</span>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer">
+                        <div class="layer-title">Hardware</div>
+                        <div class="layer-items">
+                            <span class="arch-box">Cámara</span>
+                            <span class="arch-box">GPU</span>
+                            <span class="arch-box">Audio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Demo y Uso -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2 class="slide-title">¿Cómo Usar la Aplicación?</h2>
+                <div class="demo-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Preparación</h3>
+                            <p>Imprime o muestra en pantalla el marcador Hiro</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Permisos</h3>
+                            <p>Acepta permisos de cámara en tu navegador</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-content">
+                            <h3>Tracking</h3>
+                            <p>Apunta la cámara al marcador y espera a que cargue</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Interacción</h3>
+                            <p>Usa el joystick o tus gestos para controlar el auto</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Personalización</h3>
+                            <p>Cambia el color del auto con la paleta flotante</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Retos y Logros -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2 class="slide-title">Retos Superados</h2>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="challenge-icon">⚡</div>
+                        <h3>Rendimiento</h3>
+                        <p class="challenge-problem">Procesamiento simultáneo de AR + IA es muy intensivo</p>
+                        <p class="challenge-solution">
+                            <strong>Solución:</strong> Optimización de detección, throttling de frames, 
+                            y reducción de complejidad del modelo MediaPipe
+                        </p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="challenge-icon">🎯</div>
+                        <h3>Precisión de Tracking</h3>
+                        <p class="challenge-problem">Pérdida de marcador en condiciones de iluminación variable</p>
+                        <p class="challenge-solution">
+                            <strong>Solución:</strong> Configuración adaptativa de AR.js y sugerencias 
+                            de mejores condiciones de uso
+                        </p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="challenge-icon">🔊</div>
+                        <h3>Políticas de Audio</h3>
+                        <p class="challenge-problem">Navegadores bloquean audio automático</p>
+                        <p class="challenge-solution">
+                            <strong>Solución:</strong> Sistema de activación por tap del usuario 
+                            con feedback visual claro
+                        </p>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="challenge-icon">📱</div>
+                        <h3>Compatibilidad</h3>
+                        <p class="challenge-problem">Diferentes navegadores y dispositivos</p>
+                        <p class="challenge-solution">
+                            <strong>Solución:</strong> Testing extensivo y fallbacks para 
+                            funcionalidades no soportadas
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Conclusiones -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2 class="slide-title">Conclusiones y Futuro</h2>
+                <div class="conclusions">
+                    <div class="conclusion-section">
+                        <h3>🎯 Objetivos Alcanzados</h3>
+                        <ul class="conclusion-list">
+                            <li>Integración exitosa de WebAR con visión artificial</li>
+                            <li>Sistema de control intuitivo mediante gestos</li>
+                            <li>Experiencia inmersiva y realista</li>
+                            <li>Aplicación web accesible sin instalaciones</li>
+                        </ul>
+                    </div>
+                    <div class="conclusion-section">
+                        <h3>🚀 Mejoras Futuras</h3>
+                        <ul class="conclusion-list">
+                            <li>Múltiples modelos de vehículos</li>
+                            <li>Personalización avanzada (llantas, spoilers, etc.)</li>
+                            <li>Tracking sin marcadores (SLAM)</li>
+                            <li>Modo multijugador</li>
+                            <li>Reconocimiento de voz</li>
+                        </ul>
+                    </div>
+                    <div class="conclusion-section impact">
+                        <h3>💡 Impacto</h3>
+                        <p>
+                            Este proyecto demuestra el potencial de las tecnologías web modernas 
+                            para crear experiencias inmersivas accesibles. La combinación de AR, 
+                            IA y audio procedural abre nuevas posibilidades en configuradores 
+                            de productos, educación y entretenimiento.
+                        </p>
+                    </div>
+                </div>
+                <div class="final-cta">
+                    <h3>¡Gracias por tu atención!</h3>
+                    <p>¿Preguntas?</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Keyboard hints -->
+    <div class="keyboard-hints">
+        <span>←/→ Navegar</span>
+        <span>Espacio: Siguiente</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
