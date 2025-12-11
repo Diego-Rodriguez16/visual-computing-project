@@ -5,17 +5,15 @@ export function setupUIControls() {
             console.error('Model container not found');
             return;
         }
-
-        // Setup Model Selector
-        const modelSelect = document.getElementById('model-select') as HTMLSelectElement;
+        // Model selector: attach handler if element exists
+        const modelSelect = document.getElementById('model-select') as HTMLSelectElement | null;
         if (modelSelect) {
             modelSelect.addEventListener('change', (e) => {
-                const modelPath = (e.target as HTMLSelectElement).value;
-                changeModel(modelPath);
+                const path = (e.target as HTMLSelectElement).value;
+                safeChangeModel(path);
                 if ((window as any).audioManager) (window as any).audioManager.playClick();
             });
         }
-
         // Setup Color Picker
         const colorBtns = document.querySelectorAll('.color-btn');
         colorBtns.forEach(btn => {
@@ -132,65 +130,66 @@ export function setupUIControls() {
 }
 
 /**
- * Cambia el modelo 3D que se muestra
- * @param modelPath Ruta al archivo del modelo GLB
+ * Cambia el modelo GLB del elemento `#model` de forma segura.
+ * Mantiene visibles las demás interacciones (color/reset/rotar).
  */
-function changeModel(modelPath: string) {
+function safeChangeModel(modelPath: string) {
     const modelElement = document.getElementById('model');
     if (!modelElement) {
         console.error('Model element not found');
         return;
     }
 
-    console.log('🚗 Cambiando modelo a:', modelPath);
+    // Hide while loading
+    modelElement.setAttribute('visible', 'false');
 
-    // Mostrar indicador de carga
+    // Update status UI if present
     const status = document.getElementById('status');
-    if (status) {
-        status.textContent = 'Cargando modelo...';
-    }
+    if (status) status.textContent = 'Cargando modelo...';
 
-    // Cambiar el atributo gltf-model
-    modelElement.setAttribute('gltf-model', `url(${modelPath})`);
+    // Ensure we encode URI parts (handles spaces)
+    const safeUrl = encodeURI(modelPath);
+    modelElement.setAttribute('gltf-model', `url(${safeUrl})`);
 
-    // Esperar a que el modelo cargue
-    const checkModelLoaded = () => {
-        const object3D = (modelElement as any).object3D;
-        if (object3D && object3D.children && object3D.children.length > 0) {
-            // Modelo cargado exitosamente
+    // Add a one-time listener for model-loaded
+    const onModelLoaded = () => {
+        try {
+            // Make visible
             modelElement.setAttribute('visible', 'true');
+
+            // Reset transforms to a sensible default so reset button and carManager work
+            modelElement.setAttribute('scale', '20 20 20');
+            modelElement.setAttribute('rotation', '0 0 0');
+
             if (status) {
                 status.textContent = 'Modelo cargado ✓';
-                setTimeout(() => {
-                    status.textContent = 'Listo';
-                }, 1500);
+                setTimeout(() => { if (status) status.textContent = 'Listo'; }, 1200);
             }
 
-            // Reinicializar CarManager con el nuevo modelo
-            if (window.carManager) {
-                window.carManager.resetPosition();
+            // If a carManager exists, reset its position / rebind if needed
+            if ((window as any).carManager) {
+                try { (window as any).carManager.resetPosition(); } catch (e) { /* ignore */ }
             }
-            console.log('✓ Modelo cargado exitosamente');
-        } else {
-            // Reintentar en 100ms
-            setTimeout(checkModelLoaded, 100);
+        } finally {
+            modelElement.removeEventListener('model-loaded', onModelLoaded as EventListener);
         }
     };
 
-    // Usar event listener como fallback
-    modelElement.addEventListener('model-loaded', () => {
-        console.log('✓ Evento model-loaded disparado');
-        if (status) {
-            status.textContent = 'Modelo cargado ✓';
-            setTimeout(() => {
-                status.textContent = 'Listo';
-            }, 1500);
-        }
-        if (window.carManager) {
-            window.carManager.resetPosition();
-        }
-    }, { once: true });
+    modelElement.addEventListener('model-loaded', onModelLoaded as EventListener);
 
-    // Comprobar manualmente después de 500ms
-    setTimeout(checkModelLoaded, 500);
+    // Fallback: if A-Frame doesn't fire quickly, poll object3D
+    const start = Date.now();
+    const poll = () => {
+        const obj = (modelElement as any).object3D;
+        if (obj && obj.children && obj.children.length > 0) {
+            // call handler manually
+            onModelLoaded();
+        } else if (Date.now() - start < 8000) { // timeout 8s
+            setTimeout(poll, 150);
+        } else {
+            if (status) status.textContent = 'Error cargando modelo';
+            console.error('Timeout cargando modelo:', modelPath);
+        }
+    };
+    setTimeout(poll, 300);
 }
